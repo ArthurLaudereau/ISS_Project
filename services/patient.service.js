@@ -29,7 +29,7 @@ exports.getPatient = async function(query, page, limit){
 
         // return a Error message describing the reason 
 
-        throw Error('Error while Paginating Sensors')
+        throw Error('Error while Paginating Patients')
     }
 }
 
@@ -39,6 +39,7 @@ exports.createPatient = async function(patient){
     // Creating a new Mongoose Object by using the new keyword
 
     var newPatient = new Patient({
+        // PatientID: patient.PatientID,
         Name: patient.Name,
         BirthDate: patient.BirthDate,
         In_Incubator: patient.In_Incubator
@@ -46,7 +47,7 @@ exports.createPatient = async function(patient){
 
     try{
 
-        // TEMP : Saving the Sensor to the database 
+        // TEMP : Saving the Patient to the database 
 
         var savedPatient = await newPatient.save()
 

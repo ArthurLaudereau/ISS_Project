@@ -38,7 +38,7 @@ exports.createPatient = async function(req, res, next){
     // Req.Body contains the form submit values.
 
     var patient = {
-        Patient_ID: req.body.Patient_ID,
+        // Patient_ID: req.body.Patient_ID,
         Name: req.body.Name,
         BirthDate: req.body.BirthDate,
         In_Incubator: req.body.In_Incubator
@@ -48,7 +48,7 @@ exports.createPatient = async function(req, res, next){
         
         // Calling the Service function with the new object from the Request Body
     
-        var createdPatient = await PatientService.createWeight_Sensor(patient)
+        var createdPatient = await PatientService.createPatient(patient)
         return res.status(201).json({status: 201, data: createdPatient, message: "Succesfully Created Weight_Sensor"})
     }catch(e){
         

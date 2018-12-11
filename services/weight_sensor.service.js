@@ -1,7 +1,7 @@
 // Getting the Newly created Mongoose Model we just created 
 
 var Weight_Sensor = require('../models/weight_sensor.model')
-var Patient = require('../models/patient.model')
+// var Patient = require('../models/patient.model')
 
 // Saving the context of this module inside the _the variable
 _this = this
@@ -42,7 +42,7 @@ exports.createWeight_Sensor = async function(weight_sensor){
     var newWeight_Sensor = new Weight_Sensor({
         Timestamp: new Date(),
         Value: weight_sensor.Value,
-        PatientID: Patient.Patient_ID
+        // PatientID: Patient.Patient_ID
     })
 
     try{
