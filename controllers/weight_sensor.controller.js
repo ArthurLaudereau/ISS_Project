@@ -41,7 +41,6 @@ exports.createWeight_Sensor = async function(req, res, next){
     var weight_sensor = {
         Timestamp: req.body.Timestamp,
         Value: req.body.Value,
-        // Patient_ID: req.body.Patient_ID
     }
 
     try{

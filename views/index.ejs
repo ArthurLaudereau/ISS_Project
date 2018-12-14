@@ -3,9 +3,27 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script type="text/javascript" src="/js/index.js"></script>
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <div class="index-page">
+      <div class="form">
+          <h1>Insert a Patient</h1>
+          <form class="patient-form" method="POST" action="/api/patient">
+            <input name="Name" type="text" placeholder="Name of the Patient"/>
+            <input name="BirthDate" type="text" placeholder="Date of Birth"/>
+            <input name="In_Incubator" type="text" placeholder="Is in the incubator n°"/>
+            <input type="Sensor_related" placeholder="Sensor related to the patient"/>
+            <button type="submit">POST</button>
+          </form>
+          
+      <h1>Insert a weight sensor</h1>
+        <form class="weight_sensor-form" method="POST" action="/api/weight_sensor">
+          <input name="Timestamp" type="datetime" placeholder="Timestamp"/>
+          <input name="Value" type="text" placeholder="Value the sensor"/>
+          <button type="submit">POST</button>
+        </form>
+      </div>
+    </div>
   </body>
 </html>

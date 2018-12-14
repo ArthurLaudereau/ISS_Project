@@ -38,7 +38,7 @@ exports.createPatient = async function(req, res, next){
     // Req.Body contains the form submit values.
 
     var patient = {
-        // Patient_ID: req.body.Patient_ID,
+        Sensor_related: req.body.Sensor_related, //WIP
         Name: req.body.Name,
         BirthDate: req.body.BirthDate,
         In_Incubator: req.body.In_Incubator

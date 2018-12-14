@@ -6,7 +6,7 @@ var Schema = mongoose.Schema,
 
 // common model that will be used in every collection of weight sensors
 var PatientSchema = new mongoose.Schema({
-    // Patient_ID : ObjectId,
+    Sensor_related : ObjectId,
     Name : String,
     BirthDate : Date,
     In_Incubator : String

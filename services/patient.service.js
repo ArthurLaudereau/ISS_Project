@@ -39,7 +39,7 @@ exports.createPatient = async function(patient){
     // Creating a new Mongoose Object by using the new keyword
 
     var newPatient = new Patient({
-        // PatientID: patient.PatientID,
+        Sensor_related: patient.Sensor_related, //TODO POPULATE
         Name: patient.Name,
         BirthDate: patient.BirthDate,
         In_Incubator: patient.In_Incubator
