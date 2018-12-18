@@ -3,7 +3,37 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
-    <script type="text/javascript" src="/js/index.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"> </script>
+    
+    <script type="text/javascript">
+
+    var getJSON = function(url, callback) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', url, true);
+    xhr.responseType = 'json';
+    xhr.onload = function() {
+      var status = xhr.status;
+      if (status === 200) {
+        callback(null, xhr.response);
+      } else {
+        callback(status, xhr.response);
+      }
+    };
+    xhr.send();
+    };
+
+    getJSON('http://localhost:3000/api/patient',
+function(err, data) {
+  if (err !== null) {
+    alert('Something went wrong: ' + err);
+  } else {
+    console.log(data)
+    alert('Your query count: ' + JSON.stringify(data)); //Got it ! now TODO the for each and append the table
+  }
+});
+    
+    </script>
+
   </head>
   <body>
     <div class="index-page">
@@ -25,5 +55,18 @@
         </form>
       </div>
     </div>
+
+    <table id= "entrydata">
+        <thead>
+                <th>ID</th>
+                <th>Name</th>
+                <th>BirthDate</th>
+                <th>Sensor_related</th>
+            </thead>
+          <tbody>
+        
+           </tbody>
+        </table>
+
   </body>
 </html>
