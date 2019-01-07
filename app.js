@@ -7,6 +7,10 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
+var incubatorsRouter = require('./routes/incubators');
+var teamRouter = require('./routes/team');
+var insertRouter = require('./routes/insert');
+
 var app = express();
 
 // Get the API route ...
@@ -29,6 +33,10 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/api', api);
 
+app.use('/incubators',incubatorsRouter);
+app.use('/team',teamRouter);
+app.use('/insert',insertRouter);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
@@ -37,7 +45,7 @@ app.use(function(req, res, next) {
 
 // setup the mongodb connection
 mongoose.Promise = bluebird
-mongoose.connect('mongodb://127.0.0.1:27017/baby_incubator', { useMongoClient: true})
+mongoose.connect('mongodb://127.0.0.1:27017/baby_incubator', { useNewUrlParser: true })
 .then(()=> { console.log(`Succesfully Connected to the
 Mongodb Database  at URL : mongodb://127.0.0.1:27017/baby_incubator`)})
 .catch(()=> { console.log(`Error Connecting to the Mongodb 
@@ -50,6 +58,15 @@ app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
   next();
 });
+
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
 
 // error handler
 app.use(function(err, req, res, next) {
