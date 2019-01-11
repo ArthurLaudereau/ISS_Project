@@ -1,15 +1,11 @@
 var mongoose = require('mongoose')
 var mongoosePaginate = require('mongoose-paginate')
 
-var Schema = mongoose.Schema,
-    ObjectId = Schema.ObjectId;
-
 // common model that will be used in every collection of weight sensors
 var PatientSchema = new mongoose.Schema({
-    Sensor_related : ObjectId,
     Name : String,
     BirthDate : Date,
-    In_Incubator : String
+    In_Incubator : Boolean
 })
 
 PatientSchema.plugin(mongoosePaginate)

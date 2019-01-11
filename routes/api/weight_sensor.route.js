@@ -13,7 +13,7 @@ router.get('/', Weight_SensorController.getWeight_Sensor)
 
 router.post('/', Weight_SensorController.createWeight_Sensor)
 
-// router.put('/', Weight_SensorController.updateWeight_Sensor)
+router.put('/', Weight_SensorController.updateWeight_Sensor)
 
 router.delete('/:id',Weight_SensorController.removeWeight_Sensor)
 

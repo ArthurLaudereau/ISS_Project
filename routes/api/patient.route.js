@@ -13,7 +13,7 @@ router.get('/', PatientController.getPatient)
 
 router.post('/', PatientController.createPatient)
 
-// router.put('/', PatientController.updatePatient)
+router.put('/', PatientController.updatePatient)
 
 router.delete('/:id',PatientController.removePatient)
 

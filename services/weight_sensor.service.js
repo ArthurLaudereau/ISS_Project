@@ -42,6 +42,7 @@ exports.createWeight_Sensor = async function(weight_sensor){
     var newWeight_Sensor = new Weight_Sensor({
         Timestamp: new Date(),
         Value: weight_sensor.Value,
+        Patient_ID: weight_sensor.Patient_ID
     })
 
     try{
@@ -75,40 +76,38 @@ exports.deleteWeight_Sensor = async function(id){
     }
 }
 
-// Update function, but not used here
+exports.updateWeight_Sensor = async function(weight_sensor){
+    var id = weight_sensor.id
 
-// exports.updateWeight_Sensor = async function(weight_sensor){
-//     var id = weight_sensor.id
-
-//     try{
-//         //Find the old Weight_Sensor Object by the Id
+    try{
+        //Find the old Weight_Sensor Object by the Id
     
-//         var oldWeight_Sensor = await Weight_Sensor.findById(id);
-//     }catch(e){
-//         throw Error("Error occured while Finding the Weight_Sensor")
-//     }
+        var oldWeight_Sensor = await Weight_Sensor.findById(id);
+    }catch(e){
+        throw Error("Error occured while Finding the Weight_Sensor")
+    }
 
-//     // If no old Weight_Sensor Object exists return false
+    // If no old Weight_Sensor Object exists return false
 
-//     if(!oldWeight_Sensor){
-//         return false;
-//     }
+    if(!oldWeight_Sensor){
+        return false;
+    }
 
-//     console.log(oldWeight_Sensor)
+    console.log(oldWeight_Sensor)
 
-//     //Edit the Weight_Sensor Object
+    //Edit the Weight_Sensor Object
 
-//     oldWeight_Sensor.title = weight_sensor.title
-//     oldWeight_Sensor.description = weight_sensor.description
-//     oldWeight_Sensor.status = weight_sensor.status
+    oldWeight_Sensor.Timestamp = weight_sensor.Timestamp
+    oldWeight_Sensor.Value = weight_sensor.Value
+    oldWeight_Sensor.Patient_ID = weight_sensor.Patient_ID
 
 
-//     console.log(oldWeight_Sensor)
+    console.log(oldWeight_Sensor)
 
-//     try{
-//         var savedWeight_Sensor = await oldWeight_Sensor.save()
-//         return savedWeight_Sensor;
-//     }catch(e){
-//         throw Error("And Error occured while updating the Weigth_Sensor");
-//     }
-// }
+    try{
+        var savedWeight_Sensor = await oldWeight_Sensor.save()
+        return savedWeight_Sensor;
+    }catch(e){
+        throw Error("And Error occured while updating the Weigth_Sensor");
+    }
+}

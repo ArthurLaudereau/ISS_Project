@@ -70,30 +70,30 @@ exports.removePatient = async function(req, res, next){
 
 }
 
-// exports.updatePatient = async function(req, res, next){
+exports.updatePatient = async function(req, res, next){
 
-//     // Id is necessary for the update
+    // Id is necessary for the update
 
-//     if(!req.body._id){
-//         return res.status(400).json({status: 400., message: "Id must be present"})
-//     }
+    if(!req.body._id){
+        return res.status(400).json({status: 400., message: "Id must be present"})
+    }
 
-//     var id = req.body.Patient_ID;
+    var id = req.body.id;
 
-//     console.log(req.body)
+    console.log(req.body)
 
-//     var patient = {
-//         id,
-//         Name: req.body.Name ? req.body.Name : null,
-//         BirthDate: req.body.BirthDate ? req.body.BirthDate : null,
-//         In_Incubator: req.body.In_Incubator ? req.body.In_Incubator : null
-//     }
+    var patient = {
+        id,
+        Name: req.body.Name ? req.body.Name : null,
+        BirthDate: req.body.BirthDate ? req.body.BirthDate : null,
+        In_Incubator: req.body.In_Incubator ? req.body.In_Incubator : null
+    }
 
-//     try{
-//         var updatedPatient = await PatientService.updateTodo(weight_sensor)
-//         return res.status(200).json({status: 200, data: updatedPatient, message: "Succesfully Updated Tod"})
-//     }catch(e){
-//         return res.status(400).json({status: 400., message: e.message})
-//     }
-// }
+    try{
+        var updatedPatient = await PatientService.updatePatient(patient)
+        return res.status(200).json({status: 200, data: updatedPatient, message: "Succesfully Updated Patient"})
+    }catch(e){
+        return res.status(400).json({status: 400., message: e.message})
+    }
+}
 

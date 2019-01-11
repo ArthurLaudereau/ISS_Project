@@ -70,30 +70,30 @@ exports.removeWeight_Sensor = async function(req, res, next){
 
 }
 
-// exports.updateWeight_Sensor = async function(req, res, next){
+exports.updateWeight_Sensor = async function(req, res, next){
 
-//     // Id is necessary for the update
+    // Id is necessary for the update
 
-//     if(!req.body._id){
-//         return res.status(400).json({status: 400., message: "Id must be present"})
-//     }
+    if(!req.body._id){
+        return res.status(400).json({status: 400., message: "Id must be present"})
+    }
 
-//     var id = req.body._id;
+    var id = req.body._id;
 
-//     console.log(req.body)
+    console.log(req.body)
 
-//     var weight_sensor = {
-//         id,
-//         Timestamp: req.body.Timestamp ? req.body.Timestamp : null,
-//         Value: req.body.Value ? req.body.Value : null,
-//         Patient_ID: req.body.Patient_ID ? req.body.Patient_ID : null
-//     }
+    var weight_sensor = {
+        id,
+        Timestamp: req.body.Timestamp ? req.body.Timestamp : null,
+        Value: req.body.Value ? req.body.Value : null,
+        Patient_ID: req.body.Patient_ID ? req.body.Patient_ID : null
+    }
 
-//     try{
-//         var updatedWeight_Sensor = await Weight_SensorService.updateTodo(weight_sensor)
-//         return res.status(200).json({status: 200, data: updatedWeight_Sensor, message: "Succesfully Updated Tod"})
-//     }catch(e){
-//         return res.status(400).json({status: 400., message: e.message})
-//     }
-// }
+    try{
+        var updatedWeight_Sensor = await Weight_SensorService.updateWeight_Sensor(weight_sensor)
+        return res.status(200).json({status: 200, data: updatedWeight_Sensor, message: "Succesfully Updated Weight_Sensor"})
+    }catch(e){
+        return res.status(400).json({status: 400., message: e.message})
+    }
+}
 

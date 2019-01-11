@@ -39,7 +39,6 @@ exports.createPatient = async function(patient){
     // Creating a new Mongoose Object by using the new keyword
 
     var newPatient = new Patient({
-        Sensor_related: patient.Sensor_related, //TODO POPULATE
         Name: patient.Name,
         BirthDate: patient.BirthDate,
         In_Incubator: patient.In_Incubator
@@ -76,40 +75,40 @@ exports.deletePatient = async function(id){
     }
 }
 
-// Update function, but not used here
+exports.updatePatient = async function(patient){
+    var id = patient.id
 
-// exports.updatePatient = async function(patient){
-//     var id = patient.id
+    try{
+        //Find the old Patient Object by the Id
+        update = {
+            Name: patient.Name,
+            BirthDate: patient.BirthDate,
+            In_Incubator: patient.In_Incubator,
+        }
+        var oldPatient = await Patient.findOneAndUpdate(id, update);
+    }catch(e){
+        throw Error("Error occured while Finding the Patient")
+    }
 
-//     try{
-//         //Find the old Patient Object by the Id
-    
-//         var oldPatient = await Patient.findById(id);
-//     }catch(e){
-//         throw Error("Error occured while Finding the Patient")
-//     }
+    // If no old Patient Object exists return false
 
-//     // If no old Patient Object exists return false
+    if(!oldPatient){
+        return false;
+    }
 
-//     if(!oldPatient){
-//         return false;
-//     }
+    //Edit the Patient Object
 
-//     console.log(oldPatient)
-
-//     //Edit the Patient Object
-
-//     oldPatient.title = patient.title
-//     oldPatient.description = patient.description
-//     oldPatient.status = patient.status
+    oldPatient.Name = patient.Name
+    oldPatient.BirthDate = patient.BirthDate
+    oldPatient.In_Incubator = patient.In_Incubator
 
 
-//     console.log(oldPatient)
+    console.log(oldPatient)
 
-//     try{
-//         var savedPatient = await oldPatient.save()
-//         return savedPatient;
-//     }catch(e){
-//         throw Error("And Error occured while updating the Patient");
-//     }
-// }
+    try{
+        var savedPatient = await oldPatient.save()
+        return savedPatient;
+    }catch(e){
+        throw Error("And Error occured while updating the Patient");
+    }
+}
