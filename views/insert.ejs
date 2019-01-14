@@ -6,32 +6,32 @@
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"> </script>
     
     <script type="text/javascript">
+// <!-- 
+//     var getJSON = function(url, callback) {
+//     var xhr = new XMLHttpRequest();
+//     xhr.open('GET', url, true);
+//     xhr.responseType = 'json';
+//     xhr.onload = function() {
+//       var status = xhr.status;
+//       if (status === 200) {
+//         callback(null, xhr.response);
+//       } else {
+//         callback(status, xhr.response);
+//       }
+//     };
+//     xhr.send();
+//     };
 
-    var getJSON = function(url, callback) {
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', url, true);
-    xhr.responseType = 'json';
-    xhr.onload = function() {
-      var status = xhr.status;
-      if (status === 200) {
-        callback(null, xhr.response);
-      } else {
-        callback(status, xhr.response);
-      }
-    };
-    xhr.send();
-    };
-
-    getJSON('http://localhost:3000/api/patient',
-function(err, data) {
-  if (err !== null) {
-    alert('Something went wrong: ' + err);
-  } else {
-    console.log(data)
-    alert('Your query count: ' + JSON.stringify(data)); //Got it ! now TODO the for each and append the table
-  }
-});
-    
+//     getJSON('http://localhost:3000/api/patient',
+// function(err, data) {
+//   if (err !== null) {
+//     alert('Something went wrong: ' + err);
+//   } else {
+//     console.log(data)
+//     alert('Your query count: ' + JSON.stringify(data)); //Got it ! now TODO the for each and append the table
+//   }
+// });
+//      -->
     </script>
 
   </head>
@@ -48,8 +48,8 @@ function(err, data) {
           
       <h1>Insert a weight sensor</h1>
         <form class="weight_sensor-form" method="POST" action="/api/weight_sensor">
-          <input name="Timestamp" type="datetime" placeholder="Timestamp"/>
           <input name="Value" type="text" placeholder="Value the sensor"/>
+          <input name="Patient" type="text" placeholder="ID of the Patient related"/>
           <button type="submit">POST</button>
         </form>
       </div>

@@ -42,7 +42,7 @@ exports.createWeight_Sensor = async function(weight_sensor){
     var newWeight_Sensor = new Weight_Sensor({
         Timestamp: new Date(),
         Value: weight_sensor.Value,
-        Patient_ID: weight_sensor.Patient_ID
+        Patient: weight_sensor.Patient
     })
 
     try{
@@ -99,7 +99,7 @@ exports.updateWeight_Sensor = async function(weight_sensor){
 
     oldWeight_Sensor.Timestamp = weight_sensor.Timestamp
     oldWeight_Sensor.Value = weight_sensor.Value
-    oldWeight_Sensor.Patient_ID = weight_sensor.Patient_ID
+    oldWeight_Sensor.Patient = weight_sensor.Patient
 
 
     console.log(oldWeight_Sensor)

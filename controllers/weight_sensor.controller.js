@@ -41,6 +41,7 @@ exports.createWeight_Sensor = async function(req, res, next){
     var weight_sensor = {
         Timestamp: req.body.Timestamp,
         Value: req.body.Value,
+        Patient: req.body.Patient
     }
 
     try{
@@ -63,9 +64,9 @@ exports.removeWeight_Sensor = async function(req, res, next){
 
     try{
         var deleted = await Weight_SensorService.deleteWeight_Sensor(id)
-        return res.status(204).json({status:204, message: "Succesfully Weight_Sensor Deleted"})
+        return res.status(204).json({status:204, deleted, message: "Succesfully Weight_Sensor Deleted"})
     }catch(e){
-        return res.status(400).json({status: 400, message: e.message})
+        return res.status(400).json({status: 400, deleted, message: e.message})
     }
 
 }
@@ -86,7 +87,7 @@ exports.updateWeight_Sensor = async function(req, res, next){
         id,
         Timestamp: req.body.Timestamp ? req.body.Timestamp : null,
         Value: req.body.Value ? req.body.Value : null,
-        Patient_ID: req.body.Patient_ID ? req.body.Patient_ID : null
+        Patient: req.body.Patient ? req.body.Patient : null
     }
 
     try{
