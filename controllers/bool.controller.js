@@ -21,7 +21,7 @@ exports.getBool = async function(req, res, next){
         var bools = await BoolService.getBool({}, page, limit)
         
         // Return the list of the bools with the appropriate HTTP Status Code and Message.
-        return res.status(200).json({status: 200, data: bools, message: "Succesfully bools Data Recieved"});
+        return res.status(200).json({status: 200, data: bools, message: "Succesfully Bools Data Received"});
         
     }catch(e){
         

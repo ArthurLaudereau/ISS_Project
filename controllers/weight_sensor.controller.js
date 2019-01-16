@@ -23,7 +23,7 @@ exports.getWeight_Sensor = async function(req, res, next){
         
         // Return the list of the weight sensors with the appropriate HTTP Status Code and Message.
         
-        return res.status(200).json({status: 200, data: weight_sensors, message: "Succesfully Weight_Sensors Data Recieved"});
+        return res.status(200).json({status: 200, data: weight_sensors, message: "Succesfully Weight_Sensors Data Received"});
         
     }catch(e){
         

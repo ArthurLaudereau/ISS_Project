@@ -52,6 +52,8 @@
                 items.push("<td id='" + keyC + "'>" + valC.Name + "</td>");
                 items.push("<td id='" + keyC + "'>" + birthDate + "</td>");
                 items.push("<td id='" + keyC + "'>" + valC.In_Incubator + "</td>");
+                str = "/insert?id="+valC._id+"&Name="+valC.Name+"&In_Incubator="+valC.In_Incubator+"&BirthDate="+valC.BirthDate+"'"
+                items.push("<td><a class='add-incubator' href='"+ str +"'>" + "Update" + "</a></td>");
                 items.push("</tr>");
                 //On crée la row des données du capteur de poids du patient
                 items.push("<tr id='accordeon" + valC._id + "' class='collapse'>");

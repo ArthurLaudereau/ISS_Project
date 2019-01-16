@@ -21,7 +21,7 @@ exports.getPatient = async function(req, res, next){
         var patients = await PatientService.getPatient({}, page, limit)
         
         // Return the list of the patients with the appropriate HTTP Status Code and Message.
-        return res.status(200).json({status: 200, data: patients, message: "Succesfully Patients Data Recieved"});
+        return res.status(200).json({status: 200, data: patients, message: "Succesfully Patients Data Received"});
         
     }catch(e){
         
