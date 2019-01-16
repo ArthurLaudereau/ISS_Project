@@ -1,70 +1,107 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"> </script>
-    
-    <script type="text/javascript">
-// <!-- 
-//     var getJSON = function(url, callback) {
-//     var xhr = new XMLHttpRequest();
-//     xhr.open('GET', url, true);
-//     xhr.responseType = 'json';
-//     xhr.onload = function() {
-//       var status = xhr.status;
-//       if (status === 200) {
-//         callback(null, xhr.response);
-//       } else {
-//         callback(status, xhr.response);
-//       }
-//     };
-//     xhr.send();
-//     };
 
-//     getJSON('http://localhost:3000/api/patient',
-// function(err, data) {
-//   if (err !== null) {
-//     alert('Something went wrong: ' + err);
-//   } else {
-//     console.log(data)
-//     alert('Your query count: ' + JSON.stringify(data)); //Got it ! now TODO the for each and append the table
-//   }
-// });
-//      -->
-    </script>
+<head>
+  <title>
+    <%= title %>
+  </title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <!-- Inclusion de fontAwesome-->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
+    crossorigin="anonymous">
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"> </script>
 
-  </head>
-  <body>
-    <div class="index-page">
-      <div class="form">
-          <h1>Insert a Patient</h1>
-          <form class="patient-form" method="POST" action="/api/patient">
-            <input name="Name" type="text" placeholder="Name of the Patient"/>
-            <input name="BirthDate" type="text" placeholder="Date of Birth"/>
-            <input name="In_Incubator" type="text" placeholder="Is he/she in the incubator n°"/>
-            <button type="submit">POST</button>
-          </form>
-          
-      <h1>Insert a weight sensor</h1>
-        <form class="weight_sensor-form" method="POST" action="/api/weight_sensor">
-          <input name="Value" type="text" placeholder="Value the sensor"/>
-          <input name="Patient" type="text" placeholder="ID of the Patient related"/>
-          <button type="submit">POST</button>
-        </form>
+  <script type="text/javascript">
+    // <!-- 
+    //     var getJSON = function(url, callback) {
+    //     var xhr = new XMLHttpRequest();
+    //     xhr.open('GET', url, true);
+    //     xhr.responseType = 'json';
+    //     xhr.onload = function() {
+    //       var status = xhr.status;
+    //       if (status === 200) {
+    //         callback(null, xhr.response);
+    //       } else {
+    //         callback(status, xhr.response);
+    //       }
+    //     };
+    //     xhr.send();
+    //     };
+
+    //     getJSON('http://localhost:3000/api/patient',
+    // function(err, data) {
+    //   if (err !== null) {
+    //     alert('Something went wrong: ' + err);
+    //   } else {
+    //     console.log(data)
+    //     alert('Your query count: ' + JSON.stringify(data)); //Got it ! now TODO the for each and append the table
+    //   }
+    // });
+    //      -->
+    // function update() {
+    //   var params = window.location.search.split('?')[1].split('&')
+    //   params = JSON.stringify(params)
+    //   params = params.replace(/%20/g, " ").replace(/[|\"|\"\"|]/g, "")
+    //   params = params.replace(/\[|\]/g, "")
+    //   params = params.split(",")
+    //   console.log(params)
+    //   i = 0;
+    //   params.forEach(item => {
+    //     item = item.split('=')
+    //     if (item[1] == "false") {
+    //       item[1] = "true"
+    //     }
+    //     // A partir de la il faut mettre les éléments d'items[1] dans le form
+    //     console.log(item[0], item[1])
+    //     i++;
+
+    //   });
+    // }
+
+
+
+  </script>
+
+</head>
+
+<body>
+  <div class="index-page">
+    <div class="row ">
+      <div class="col-md-9"></div>
+      <div class="col-md-2" style="text-align:center">
+        <a href='/incubators' class="add-incubator" style="padding-bottom:10%">Go Back</a>
       </div>
+      <div class="col-md-1"></div>
     </div>
+    <div class="form">
+      <h1>Insert a Patient</h1>
+      <form class="patient-form" method="POST" action="/api/patient">
+        <input name="Name" type="text" placeholder="Name of the Patient" />
+        <input name="BirthDate" type="text" placeholder="Date of Birth" />
+        <input name="In_Incubator" type="text" placeholder="Is he/she in the incubator" />
+        <button type="submit">POST</button>
+      </form>
 
-    <table id= "entrydata">
-        <thead>
-                <th>ID</th>
-                <th>Name</th>
-                <th>BirthDate</th>
-            </thead>
-          <tbody>
-        
-           </tbody>
-        </table>
+      <h1>Insert a weight sensor</h1>
+      <form class="weight_sensor-form" method="POST" action="/api/weight_sensor">
+        <input name="Value" type="text" placeholder="Value the sensor" />
+        <input name="Patient" type="text" placeholder="ID of the Patient related" />
+        <button type="submit">POST</button>
+      </form>
 
-  </body>
+      <h1>Update a Patient</h1>
+      <form class="patient-form" id="update" method="POST" action="/api/bool">
+        <input name="Patient" type="text" placeholder="ID of the Patient" />
+        <input name="In_Incubator" type="text" placeholder="Is he/she in the incubator" />
+        <button type="submit">Update</button>
+      </form>
+
+    </div>
+  </div>
+
+  </tbody>
+  </table>
+
+</body>
+
 </html>

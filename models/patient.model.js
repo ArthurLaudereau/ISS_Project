@@ -1,7 +1,7 @@
 var mongoose = require('mongoose')
 var mongoosePaginate = require('mongoose-paginate')
 
-// common model that will be used in every collection of weight sensors
+// common model that will be used in every collection of patients
 var PatientSchema = new mongoose.Schema({
     Name : String,
     BirthDate : Date,
