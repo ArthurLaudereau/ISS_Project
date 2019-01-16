@@ -23,8 +23,6 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
     <script type="text/javascript">
-        // Load the Visualization API and the linechart package.
-        google.charts.load('current', { 'packages': ['corechart'] });
 
         var patients = {};
         var sensors = {};
@@ -48,73 +46,76 @@
             var items = [];
             $.each(patients, function (keyC, valC) {
                 // On crée la row du patient dans le tableau
+                birthDate = valC.BirthDate.substring(0, 10);
                 items.push("<tr data-toggle='collapse' href='#accordeon" + valC._id + "'>");
                 items.push("<td id='" + keyC + "'>" + valC._id + "</td>");
                 items.push("<td id='" + keyC + "'>" + valC.Name + "</td>");
-                items.push("<td id='" + keyC + "'>" + valC.BirthDate + "</td>");
+                items.push("<td id='" + keyC + "'>" + birthDate + "</td>");
                 items.push("<td id='" + keyC + "'>" + valC.In_Incubator + "</td>");
-                str = "/insert?id="+valC._id+"&Name="+valC.Name+"&In_Incubator="+valC.In_Incubator+"&BirthDate="+valC.BirthDate+"'"
-                items.push("<td><a class='add-incubator' href='"+ str +"'>" + "Update" + "</a></td>");
                 items.push("</tr>");
-            
                 //On crée la row des données du capteur de poids du patient
                 items.push("<tr id='accordeon" + valC._id + "' class='collapse'>");
                 items.push("<td colspan='4'>");
 
                 $.each(sensors, function (keyS, valS) {
                     if (valC._id == valS.Patient) {
-                        items.push(valS.Value + "   " + valS.Timestamp + "<br>");
+                        //On prépare une div qui contiendra le graphique
+                        items.push("<div align=" + "'center'" + "id='chart_div" + valC._id + "'></div>");
+                        items.push("</td>");
+                        items.push("</tr>");
                     }
                 });
-                // Set a callback to run when the Google Visualization API is loaded.
-                google.charts.setOnLoadCallback(drawChart);
-                items.push('<div id="chart_div"></div>');
-                items.push("</td>");
-                items.push("</tr>");
 
+                // Set a callback to run when the Google Visualization API is loaded.
+                google.charts.load('45', { packages: ['corechart'] });
                 // Callback that creates and populates a data table,
                 // instantiates the pie chart, passes in the data and
                 // draws it.
+                // Load the Visualization API and the linechart package.
+                google.charts.setOnLoadCallback(drawChart);
+
+                // Cette fonction trace le graphe représentant le poids du bébé en fonction de la date
                 function drawChart() {
                     // Load the Visualization API and the linechart package.
                     // Create the data table.
-                    var dataListTime = [];
-                    var dataListVal = [];
+                    tableTime = [];
+                    tableVal = [];
 
                     $.each(sensors, function (keyS, valS) {
                         if (valC._id == valS.Patient) {
-                            date = new Date(valS.Timestamp)
-                            dataListTime.push(date); // La piraterie n'est jamais finie
-                            dataListVal.push(valS.Value); // La piraterie n'est jamais finie
+                            //On prépare le format date
+                            annee = valS.Timestamp.substring(0, 4);
+                            mois = valS.Timestamp.substring(5, 7);
+                            jour = valS.Timestamp.substring(8, 10);
+                            heure = valS.Timestamp.substring(11, 13);
+                            minute = valS.Timestamp.substring(14, 16);
+                            dateConcat = new Date(annee, mois, jour, heure, minute);
+
+                            tableTime.push(dateConcat);
+                            tableVal.push(parseFloat(valS.Value));
                         }
                     });
+                    console.log(tableTime,tableVal)
 
-                    arrayCombined = [];
-                    for (let i = 1; i < dataListTime.length; i++) {
-                        arrayCombined.push([dataListTime[i], dataListVal[i]])
+                    var data = new google.visualization.DataTable();
+                    data.addColumn('datetime', 'Date');
+                    data.addColumn('number', 'Weight');
+                    var i;
+                    for (i = 0; i < tableTime.length; i++) {
+                        data.addRows([
+                            [tableTime[i], tableVal[i]]
+                        ]);
                     }
 
 
-                    console.log(arrayCombined)
 
-                    test = [
-                        ["Time", 'Weight'],
-                        ["2019-01-11", 1205],
-                        ["2019-01-11", 1170],
-                        ["2019-01-11", 1100],
-                        ["2019-01-11", 1190]
-                    ]
+                    var chart = new google.visualization.LineChart(document.getElementById('chart_div' + valC._id));
+                    chart.draw(data, { width: 1000, height: 500, hAxis: { title: 'Time' }, vAxis: { viewWindow: { min: 0, max: 12 }, ticks: [2, 4, 6, 8, 10], title: 'Weight' }, legend: 'bottom', title: 'Evolution of the weight of the baby' });
 
-
-                    var data = new google.visualization.arrayToDataTable(test);
-
-                    console.log(data)
-
-                    var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
-                    chart.draw(data, { hAxis: { title: 'Time' }, vAxis: { title: 'Weight' }, width: 600, height: 400, legend: 'bottom', title: 'Evolution of the weight of the baby' });
                 }
 
             });
+
 
             $("<tbody/>", { html: items.join("") }).appendTo("table");
 
@@ -175,6 +176,8 @@
                     <div class="col-md-1"></div>
                 </div>
                 <div class="row">
+                    <div id="chart_div">
+                    </div>
                 </div>
             </div>
         </div>
